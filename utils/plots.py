@@ -67,6 +67,29 @@ def check_pil_font(font=FONT, size=10):
         except URLError:  # not online
             return ImageFont.load_default()
 
+def custom_concat(a, remove_threshold):
+    i = 0
+    six2eight = -1 *torch.ones((len(a[0]), 8))
+    six2eight[:,:6] = a[0]
+    a[0] = six2eight
+
+    while i < len(a[0])-1:
+        x1_list = [det[0] for det in a[0]]
+        y1_list = [det[1] for det in a[0]]
+        x2_list = [det[2] for det in a[0]]
+        y2_list = [det[3] for det in a[0]]
+        box_clus = int(abs(x1_list[i+1] - x1_list[i]) + abs(y1_list[i+1] - y1_list[i]) + abs(x2_list[i+1] - x2_list[i]) + abs(y2_list[i+1] - y2_list[i]))
+        if box_clus < remove_threshold:
+            class_value = a[0][i+1][5].unsqueeze(0)#([16.])
+            if a[0][i:i+1, 6] == -1:
+                a[0][i:i+1, 6] = class_value
+            else:
+                a[0][i:i+1, 7] = class_value
+            a[0] = torch.cat((a[0][:i+1], a[0][i+2:]), dim=0)#중복줄 삭제요 tensor([[]])
+        else:
+          i += 1
+  
+    return a
 
 class Annotator:
     # YOLOv5 Annotator for train/val mosaics and jpgs and detect/hub inference annotations

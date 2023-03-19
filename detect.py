@@ -46,7 +46,7 @@ from models.common import DetectMultiBackend
 from utils.dataloaders import IMG_FORMATS, VID_FORMATS, LoadImages, LoadScreenshots, LoadStreams
 from utils.general import (LOGGER, Profile, check_file, check_img_size, check_imshow, check_requirements, colorstr, cv2,
                            increment_path, non_max_suppression, print_args, scale_boxes, strip_optimizer, xyxy2xywh)
-from utils.plots import Annotator, colors, save_one_box
+from utils.plots import Annotator, colors, save_one_box, custom_concat
 from utils.torch_utils import select_device, smart_inference_mode
 
 
@@ -129,10 +129,10 @@ def run(
 
         # NMS
         with dt[2]:
-            pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det)
+            pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det)\
             #mj_add
-            pred = torch.cat((pred[0][0, :5], pred[0][:, 5]))
-            pred = [pred.view(1, -1)]
+            pred[0] = pred[0][pred[0][:, 0] >= 0]
+            pred = custom_concat(pred, 30)
         # Second-stage classifier (optional)
         # pred = utils.general.apply_classifier(pred, classifier_model, im, im0s)
 
@@ -158,6 +158,7 @@ def run(
 
                 # Print results mj_add
                 for c in det[:, 5:8].unique():
+                  if c >=0:
                     n = (det[:, 5:8] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
 
@@ -177,7 +178,15 @@ def run(
                         c1 = int(cls1)  # integer class
                         c2 = int(cls2)
                         c3 = int(cls3)
-                        new_names = names[c1] + ' ' + names[c2] + ' ' + names[c3]
+                        if c1 >= 0:
+                            if c2 >= 0:
+                                if c3 >= 0:
+                                    new_names = names[c1] + ' ' + names[c2] + ' ' + names[c3]
+                                else:
+                                    new_names = names[c1] + ' ' + names[c2]
+                            else:
+                                new_names = names[c1]
+
                         label = None if hide_labels else (new_names if hide_conf else f'{new_names} {conf:.2f}')
                         annotator.box_label(xyxy, label, color=colors(c, True))
                     if save_crop:
