@@ -1,8 +1,8 @@
-train: /kaggle/input/5005-5061-blue-add/cars_train
-val: /kaggle/input/5005-5061-blue-add/cars_test
+train: /kaggle/input/noh-2b-augg/cars_train
+val: /kaggle/input/noh-2b-augg/cars_test
 
-nc: 18
-names: ['Audi','BMW','Chevrolet','Dodge','Ford','Hyundai','Benz',
+nc: 17
+names: ['Audi','BMW','Chevrolet','Dodge','Ford','Benz',
         'SUV','Sedan','Convertible','Coupe','Truck','Van',
         'blue','red','white','black','grey']
 
