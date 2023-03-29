@@ -46,7 +46,7 @@ from models.common import DetectMultiBackend
 from utils.dataloaders import IMG_FORMATS, VID_FORMATS, LoadImages, LoadScreenshots, LoadStreams
 from utils.general import (LOGGER, Profile, check_file, check_img_size, check_imshow, check_requirements, colorstr, cv2,
                            increment_path, non_max_suppression, print_args, scale_boxes, strip_optimizer, xyxy2xywh)
-from utils.plots import Annotator, colors, save_one_box, custom_concat
+from utils.plots import Annotator, colors, save_one_box, custom_concat, only_one_large_box
 from utils.torch_utils import select_device, smart_inference_mode
 
 
@@ -133,6 +133,7 @@ def run(
             #mj_add
             pred[0] = pred[0][pred[0][:, 0] >= 0]
             pred = custom_concat(pred, 30)
+            #pred = [only_one_large_box(pred[0])]
         # Second-stage classifier (optional)
         # pred = utils.general.apply_classifier(pred, classifier_model, im, im0s)
 

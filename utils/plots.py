@@ -91,6 +91,14 @@ def custom_concat(a, remove_threshold):
   
     return a
 
+def only_one_large_box(detections):
+    
+    boxes = detections[:, :4]
+    scores = detections[:, 4]
+    keep = torch.argmax((boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1]))
+
+    return detections[keep].unsqueeze(0)
+
 class Annotator:
     # YOLOv5 Annotator for train/val mosaics and jpgs and detect/hub inference annotations
     def __init__(self, im, line_width=None, font_size=None, font='Arial.ttf', pil=False, example='abc'):
