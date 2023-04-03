@@ -1,5 +1,5 @@
-train: /kaggle/input/noh-2b-augg/cars_train
-val: /kaggle/input/noh-2b-augg/cars_test
+train: /kaggle/input/4740-benz-add/cars_train
+val: /kaggle/input/4740-benz-add/cars_test
 
 nc: 17
 names: ['Audi','BMW','Chevrolet','Dodge','Ford','Benz',
