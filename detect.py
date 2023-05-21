@@ -188,7 +188,7 @@ def run(
                             else:
                                 new_names = names[c1]
 
-                        label = None if hide_labels else (new_names if hide_conf else f'{new_names} {conf:.2f}')
+                        label = None if hide_labels else (new_names if hide_conf else f'{new_names}')
                         annotator.box_label(xyxy, label, color=colors(c, True))
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
