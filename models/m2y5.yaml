@@ -14,23 +14,23 @@ anchors:
 backbone:
   # [from, number, module, args]
   [ [ -1, 1, Conv, [ 32, 3, 2 ] ],  # 0-P1/2 32x320x320
-    [ -1, 1, InvertedResidual, [ 16, 1, 1 ] ],  # 1        16x320x320
-    [ -1, 1, InvertedResidual, [ 24, 2, 6 ] ],  # 2-P2/4   24x160x160
-    [ -1, 1, InvertedResidual, [ 24, 1, 6 ] ],  # 3-P2/4   24x160x160
-    [ -1, 1, InvertedResidual, [ 32, 2, 6 ] ],  # 4-P3/8   32x80x80
-    [ -1, 1, InvertedResidual, [ 32, 1, 6 ] ],  # 5-P3/8   32x80x80
-    [ -1, 1, InvertedResidual, [ 32, 1, 6 ] ],  ##6-P3/8   32x80x80
-    [ -1, 1, InvertedResidual, [ 64, 2, 6 ] ],  # 7-P4/16  64x40x40
-    [ -1, 1, InvertedResidual, [ 64, 1, 6 ] ],  # 8-P4/16  64x40x40
-    [ -1, 1, InvertedResidual, [ 64, 1, 6 ] ],  # 9-P4/16  64x40x40
-    [ -1, 1, InvertedResidual, [ 64, 1, 6 ] ],  ##10-P4/16 64x40x40
-    [ -1, 1, InvertedResidual, [ 96, 1, 6 ] ],  # 11       96X40X40
-    [ -1, 1, InvertedResidual, [ 96, 1, 6 ] ],  # 12       96X40X40
-    [ -1, 1, InvertedResidual, [ 96, 1, 6 ] ],  ##13       96X40X40
-    [ -1, 1, InvertedResidual, [ 160, 2, 6 ] ], # 14-P5/32  160X20X20
-    [ -1, 1, InvertedResidual, [ 160, 1, 6 ] ], # 15-P5/32  160X20X20
-    [ -1, 1, InvertedResidual, [ 160, 1, 6 ] ], ##16-P5/32  160X20X20
-    [ -1, 1, InvertedResidual, [ 320, 1, 6 ] ],  # 17       320X20X20
+    [ -1, 1, InvertedResidual, [ 16, 1, 1 ] ],  # 1        16x160x160
+    [ -1, 1, InvertedResidual, [ 24, 2, 6 ] ],  # 2-P2/4   24x80x80
+    [ -1, 1, InvertedResidual, [ 24, 1, 6 ] ],  # 3-P2/4   24x80x80
+    [ -1, 1, InvertedResidual, [ 32, 2, 6 ] ],  # 4-P3/8   32x40x40
+    [ -1, 1, InvertedResidual, [ 32, 1, 6 ] ],  # 5-P3/8   32x40x40
+    [ -1, 1, InvertedResidual, [ 32, 1, 6 ] ],  ##6-P3/8   32x40x40
+    [ -1, 1, InvertedResidual, [ 64, 2, 6 ] ],  # 7-P4/16  64x20x20
+    [ -1, 1, InvertedResidual, [ 64, 1, 6 ] ],  # 8-P4/16  64x20x20
+    [ -1, 1, InvertedResidual, [ 64, 1, 6 ] ],  # 9-P4/16  64x20x20
+    [ -1, 1, InvertedResidual, [ 64, 1, 6 ] ],  ##10-P4/16 64x20x20
+    [ -1, 1, InvertedResidual, [ 96, 1, 6 ] ],  # 11       96X20X20
+    [ -1, 1, InvertedResidual, [ 96, 1, 6 ] ],  # 12       96X20X20
+    [ -1, 1, InvertedResidual, [ 96, 1, 6 ] ],  ##13       96X20X20
+    [ -1, 1, InvertedResidual, [ 160, 2, 6 ] ], # 14-P5/32  160X10X10
+    [ -1, 1, InvertedResidual, [ 160, 1, 6 ] ], # 15-P5/32  160X10X10
+    [ -1, 1, InvertedResidual, [ 160, 1, 6 ] ], ##16-P5/32  160X10X10
+    [ -1, 1, InvertedResidual, [ 320, 1, 6 ] ],  # 17       320X10X10
   ]
  
 # YOLOv5 v6.0 head
